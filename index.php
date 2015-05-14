@@ -39,6 +39,7 @@ if($show[mem_privilege]==1){
 $_SESSION['m_id'] = mysql_result($sql, 0, "mem_id");
 $_SESSION['m_name'] = mysql_result($sql, 0, "mem_name");
 $_SESSION['m_lastname'] = mysql_result($sql, 0, "mem_lastname");
+$_SESSION['mem_no'] = mysql_result($sql, 0, "mem_no");
 
 
 //บันทึกการเข้าระบบ

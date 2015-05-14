@@ -92,16 +92,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 
   <div id="container">
     <div id="services">
-	<form action="?s=show" method="get">
-      <h2 class="col1">ตารางเรียน
-        <label>
-        <input name="date" type="date" id="date" value="<? echo $_REQUEST[date];?>" />
-        </label>
-        <label>
-        <input type="submit" name="Submit2" value="ค้นหา" />
-        </label>
-      </h2>
-	 </form>
+
 <!--ใส่วันที่ได้ที่่ตรงนี้ -->
 <?php
 $L_w[1]="จันทร์";
@@ -115,11 +106,10 @@ $L_w[1]="จันทร์";
 ?>
 
 <?php
-if(!isset($_POST[Submit])){
+
 ?>
 
 </span>
-<form action="?insert=add&date=<? echo $_REQUEST[date];?>" method="post" name="time_table_set" class="style2">
 <table width="75%" border="0" cellspacing="0" cellpadding="0" align="center">
   <tr>
     <td bgcolor="#ffffff"><table width="100%" border="0" cellspacing="1" cellpadding="2">
@@ -161,7 +151,7 @@ echo $L_w[$i];
           &nbsp;</span></td>
         <?php
     for($t=7;$t<=15;$t++){
-	$sql2 = mysql_query ("select * from schedule where time='".$t."' and week='".$i."' and date = '$_REQUEST[date]'");
+	$sql2 = mysql_query ("select * from schedule where time='".$t."' and week='".$i."' and mem_no = '$_SESSION[mem_no]'");
 	$num=mysql_num_rows($sql2);
 	$show_data2=mysql_fetch_array($sql2);
 		if($i==0){
@@ -222,9 +212,9 @@ echo $L_w[$i];
   </tr>
 
 </table>
-</form>
+
 <?php
-}//end if
+//end if
 ?>
 
 

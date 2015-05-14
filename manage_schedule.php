@@ -92,16 +92,34 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
   <div id="container">
     <div id="services">
 <!-- -------------------------------------------------------------------------------------- -->
-	<form action="?s1=show" method="get">
-      <h2 class="col1">ตารางเรียน
-        <label>
-        <input name="date" type="date" id="date" value="<? echo $_REQUEST[date];?>" />
-        
-        </label>
-        <label>
-        <input type="submit" name="Submit2" value="ค้นหา"/>
-        </label>
-      </h2>
+	<form action="?s=show" method="get">
+	<table class="col1" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<td width="">เลือกนักเรียน</td>
+			<td width=""><select name="member" id="member" >
+        		<option value="">--เลือกนักเรียน--</option>
+        	<?	$q="select * from member ";
+				$qr=mysql_query($q);
+				while($data=mysql_fetch_array($qr))
+				{ ?>
+					<option value="<? echo $data[mem_no];?>"><? echo $data[mem_name]." ".$data[mem_lastname];?></option>	
+				<?}?>
+				</select>   
+			</td>
+			<td width=""><input type="submit" name="Submit2" value="ค้นหา"/></td>
+			<td width="290px"></td>
+			<td width="200px"align="right" bgcolor="#FFFF99"><?php if ($_REQUEST[member] =="") { echo " "; }else {echo " ตารางเรียนของนักเรียน :";}?></td>
+			<td width="140" bgcolor="#FFFF99"><?php  $sqls="select * from member where mem_no = '$_REQUEST[member]'";
+				$arr=mysql_query($sqls);
+				while($print=mysql_fetch_array($arr))
+				{ ?>
+					
+					<? echo $print[mem_name]." ".$print[mem_lastname];?>
+					
+				<?}?>
+			</td>			
+		</tr>
+      </table>
 	 </form>
 <!-- -------------------------------------------------------------------------------------- -->
 <!--ใส่วันที่ได้ที่่ตรงนี้ -->
@@ -122,7 +140,7 @@ if(!isset($_POST[Submit]))
 		?>
 
 </span>
-<form action="?insert=add&date=<? echo $_REQUEST[date];?>" method="post" name="time_table_set" class="style2"> <!-- end form (1) -->
+<form action="?insert=add&member=<? echo $_REQUEST[member];?>" method="post" name="time_table_set" class="style2"> <!-- end form (1) -->
 <table width="75%" border="0" cellspacing="0" cellpadding="0" align="center"> <!-- table (1) -->
   <tr>
     <td bgcolor="#ffffff"> 
@@ -182,7 +200,7 @@ if(!isset($_POST[Submit]))
         		<?php
     			for($t=7;$t<=15;$t++) // for (2)
     				{
-						$sql2 = mysql_query ("select * from schedule where time='".$t."' and week='".$i."' and date = '$_REQUEST[date]'");
+						$sql2 = mysql_query ("select * from schedule where time='".$t."' and week='".$i."' and mem_no = '$_REQUEST[member]'");
 						
 						$num=mysql_num_rows($sql2);
 						$show_data2=mysql_fetch_array($sql2);
@@ -265,7 +283,7 @@ if(!isset($_POST[Submit]))
 						{
 							echo"<script>alert('กรุณาเลือกคาบก่อน');history.back();</script>";
 						}
-						else if($_REQUEST[date]=='') /// ส่วนที่ต้องแก้  --> member_id
+						else if($_REQUEST[member]=='') /// ส่วนที่ต้องแก้  --> member_id
 							{
 								echo"<script>alert('กรุณาเลือกนักเรียนก่อน');history.back();</script>";
 							}
@@ -305,7 +323,7 @@ if(!isset($_POST[Submit]))
         					<tr>
           						<td colspan="2" align="center" bgcolor="#FFFFFF">
           							<label>
-          								<input name="date" type="hidden" id="date" value="<? echo $_REQUEST[date];?>" readonly="true" />
+          								<input name="member" type="hidden" id="member" value="<? echo $_REQUEST[member];?>" readonly="true" />
           								<input name="set_term" type="hidden" value="<?php echo  $_POST[set_term]?>" />
             							<input type="submit" name="OK_insert" id="OK_insert" value=" ตกลง " />
                    						<input type="button" name="cancel" id="cancel" value=" ยกเลิก "  onclick="javascript:navigate('<?php echo  $_SERVER['PHP_SELF']?>');"/>

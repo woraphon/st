@@ -18,7 +18,7 @@ $ex2=split("##",$_POST[use_time][$count_max]);
 $ex_time_max=$ex2[1]+1;
 //echo $ex[1];
 
-@mysql_query ("insert schedule set subject = '$_REQUEST[subject]',time = '".$ex[1]."', time_min = '".$ex1[1]."', time_max = '$ex_time_max', col = '$_REQUEST[cols_table]',week = '".$ex[0]."', date = '$_REQUEST[date]' ,setting = 0, ids = '$_REQUEST[set_term]'")or die(mysql_error());
+@mysql_query ("insert schedule set subject = '$_REQUEST[subject]',time = '".$ex[1]."', time_min = '".$ex1[1]."', time_max = '$ex_time_max', col = '$_REQUEST[cols_table]',week = '".$ex[0]."', mem_no = '$_REQUEST[member]' ,setting = 0, ids = '$_REQUEST[set_term]'")or die(mysql_error());
 
 /*$sql = mysql_query ("INSERT INTO schedule ('subject', 'time', 'time_min', 'time_max', 'col', 'week', 'date', 'setting', 'ids') VALUES (NULL, '".$_POST[subject]."', '".$ex[1]."', '".$ex1[1]."', '".$ex_time_max."', '".$_POST[cols_table]."', '".$ex[0]."', '', '0', '".$_POST[set_term]."')")or die(mysql_error());*/
 }
