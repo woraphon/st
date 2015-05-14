@@ -1,0 +1,32 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+
+    #box_tab {
+    width: 500px;
+    height: 500px;
+    margin: 0px 0px 0px 0px;
+    }
+
+    #box_menu{
+    width: 500px;
+    height: 20px;
+    margin: 0;
+    padding: 0;
+    font-family: Tahoma, Verdana, sans-serif;
+    font-size: 12px;
+    }
+
+    #box_menu li{
+    display: inline;
+    }
+
+
+    #box_menu li a{
+    padding: 10px;
+    text-decoration: none;
+    }
+.hidden{
+display:none;
+}
