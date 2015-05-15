@@ -26,6 +26,7 @@ body {
 a {
 	color: #555;
 	text-decoration: none;
+	background: #ff0000;
 }
 
 .container {

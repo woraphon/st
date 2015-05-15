@@ -26,13 +26,24 @@ $error3 = "<font color=red>กรุณาเลือกปีการศึ�
 
 else {
 
+$sql = mysql_query ("select * from member where mem_no = '$_REQUEST[mem_no]'");
+if(mysql_num_rows($sql)>0){
+
+echo "<script language=\"javascript\">";
+	echo "alert('รหัสนิสิตนี้ซ้ำกับในระบบ!');";
+	echo "history.back();";
+	echo "</script>";	
+}
+
+else {
 @mysql_query ("insert member set mem_no = '$_REQUEST[mem_no]',mem_pass = '$_REQUEST[pass]',mem_name = '$_REQUEST[name]',mem_lastname = '$_REQUEST[lastname]',mem_email = '$_REQUEST[email]',mem_year = '$_REQUEST[year]',mem_privilege = 1 ") or die (mysql_error());
 
 echo "<script language=\"javascript\">";
-	echo "alert('ลงทะเบียนเรียบร้อย!');";
+	echo "alert('ลงทะเบียนเรียบร้อย');";
 	echo "window.location='index.php'";
 	echo "</script>";	
 	}}
+	}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="EN" lang="EN" dir="ltr">

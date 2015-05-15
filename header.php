@@ -9,6 +9,7 @@ session_start ();
 
 <title>Untitled Document</title>
 <link rel="stylesheet" href="styles/layout.css" type="text/css" />
+
 </head>
 
 <body>

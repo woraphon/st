@@ -32,7 +32,7 @@ mysql_close();
 <?php
 echo "<script language=\"javascript\">";
 	echo "alert('เพิ่มตารางเรียนเรียบร้อย!');";
-	echo "window.location='manage_schedule.php'";
+	echo "window.location='manage_schedule.php?member=$_REQUEST[member]&Submit2=ค้นหา'";
 	echo "</script>";	
 ?>
 <?php 

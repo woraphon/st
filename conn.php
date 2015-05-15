@@ -8,6 +8,14 @@ mysql_query ("SET NAMES UTF8");
 date_default_timezone_set('Asia/Bangkok');
 $title = "ระบบจัดเก็บฐานข้อมูลครูสอนพิเศษ";
 
+
+/* mysql_connect ("localhost","design2hou_st","123456789") or die ('<u><b>ไม่สามารถเชื่อมต่อฐานข้อมูลได้ กรุณาตรวจสอบรหัสผ่าน</b></u>');
+mysql_select_db ("design2hou_st");
+mysql_query ("SET NAMES UTF8");
+date_default_timezone_set('Asia/Bangkok');
+$title = " ระบบบันทึกการตรวจสุขภาพและการตัดสินใจ ชั้นอนุบาลโรงเรียนบ้านโป่งไหม"; */
+
+
 // chk login
 function chk_login (){
 if(!isset($_SESSION['m_id'])){

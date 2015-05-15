@@ -95,7 +95,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 	<form action="?s=show" method="get">
 	<table class="col1" border="0" cellspacing="0" cellpadding="0">
 		<tr>
-			<td width="">เลือกนักเรียน</td>
+			<td width="100px">เลือกนักเรียน</td>
 			<td width=""><select name="member" id="member" >
         		<option value="">--เลือกนักเรียน--</option>
         	<?	$q="select * from member ";
@@ -107,9 +107,9 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 				</select>   
 			</td>
 			<td width=""><input type="submit" name="Submit2" value="ค้นหา"/></td>
-			<td width="290px"></td>
+			<td width="250px"></td>
 			<td width="200px"align="right" bgcolor="#FFFF99"><?php if ($_REQUEST[member] =="") { echo " "; }else {echo " ตารางเรียนของนักเรียน :";}?></td>
-			<td width="140" bgcolor="#FFFF99"><?php  $sqls="select * from member where mem_no = '$_REQUEST[member]'";
+			<td width="180" bgcolor="#FFFF99"><?php  $sqls="select * from member where mem_no = '$_REQUEST[member]'";
 				$arr=mysql_query($sqls);
 				while($print=mysql_fetch_array($arr))
 				{ ?>
@@ -183,6 +183,7 @@ if(!isset($_POST[Submit]))
 						?>
       		<tr> <!-- tr (2) -->
         		<td align="left" bgcolor="<?php echo  $color?>"><span class="style3">
+        		
           			<!-- <?php echo  $msg[$i]?> -->
             		<!--<?php echo  $date_t[$i]?> -->
             			<?php
@@ -222,20 +223,26 @@ if(!isset($_POST[Submit]))
         		<?php
     			if($num==1 and $show_data2[setting]==1) //if (2)
     				{ ?>
-        				<td align="center" bgcolor="<?php echo  $bg?>" colspan="<?php echo  $show_data2[col]?>" bordercolor="<?php echo  $borc?>">
-        					<span class="style3">
+        				<td  align="center" bgcolor="<?php echo  $bg?>" colspan="<?php echo  $show_data2[col]?>" bordercolor="<?php echo  $borc?>">
+        					<span class="style3" >
+        					 
+        					
           			<?
+          				
     				if($i==0)
     					{
 							$time_next=$t+1;
 							$time_list=$t.".00"."-".$time_next.".00";
-							echo $time_list;
+							echo $time_list ;
 						}
 						else
-							{  
-								echo  $show_data2[subject];
-							}	?>
-          			&nbsp;</span>
+							{  ?>	 
+								<? echo  $show_data2[subject]/* ."-".$show_data2[time]."-".$show_data2[week]."-".$show_data2[mem_no]."-".$show_data2[id] */;  ?>
+						<? 	}	?>
+						
+          			&nbsp;&nbsp;&nbsp;&nbsp;
+          				<a href="delete_schedule.php?member=<? echo $_REQUEST[member];?>&col=<? echo $show_data2[col]?>&id=<? echo $show_data2[id]?>&week=<? echo $show_data2[week]?>'" type="button" onclick="return confirm('คุณต้องการลบหรือไม่ ?')"class="btn btn-primary btn-lg">[ลบ]</a>
+          			</span>
           				</td>
         		<?
 					} //end if (2)
