@@ -7,7 +7,7 @@ chk_login ();
 if($_REQUEST['up']=='insert'){
 
 $file = strrchr($_FILES["file"]["name"], "."); //ตัดนามสกุลไฟล์เก็บไว้
-$newfilename = (Date("dmy_His").$file); //ตั้งเป็น วันที่_เวลา.นามสกุล
+$newfilename = ($_REQUEST[name].$file); //ตั้งเป็น วันที่_เวลา.นามสกุล
 move_uploaded_file ($_FILES['file']['tmp_name'],"docs/".$newfilename);
 
 //เพิ่มข้อมูลลงตาราง docs
@@ -33,13 +33,13 @@ if($file!=''){
 move_uploaded_file ($_FILES['file']['tmp_name'],"docs/".$newfilename);
 
 //แก้ไขข้อมูลตาราง docs
-@mysql_query ("update doc_file set doc_name = '$_REQUEST[name]',doc_detail = '$_REQUEST[detail]',doc_file = '$newfilename',doc_status = '$_REQUEST[status]'") or die (mysql_error());
+@mysql_query ("update doc_file set doc_name = '$_REQUEST[name]',doc_detail = '$_REQUEST[detail]',doc_file = '$newfilename',doc_status = '$_REQUEST[status]' where doc_id = '$_REQUEST[id]'") or die (mysql_error());
 
 }
 
 else {
 //แก้ไขข้อมูลตาราง docs
-@mysql_query ("update doc_file set doc_name = '$_REQUEST[name]',doc_detail = '$_REQUEST[detail]',doc_status = '$_REQUEST[status]'") or die (mysql_error());
+@mysql_query ("update doc_file set doc_name = '$_REQUEST[name]',doc_detail = '$_REQUEST[detail]',doc_status = '$_REQUEST[status]' where doc_id ='$_REQUEST[doc_id]'") or die (mysql_error());
 
 
 
@@ -89,13 +89,13 @@ if($_REQUEST['doc']=='del'){
 	  <table width="100%" border="1">
         <tr>
           <th class="col7" scope="col">ลำดับ</th>
-          <th class="col7" scope="col">ชื่อเอกสาร</th>
-          <th class="col7" scope="col">ผู้สร้าง</th>
-          <th class="col7" scope="col">วันที่สร้าง</th>
+          <th class="col7" scope="col">ชื่อเอกสาร</th> 
+          <th class="col7" scope="col">วันที่อัพโหลด</th>
           <th class="col7" scope="col">View</th>
           <th class="col7" scope="col">Edit</th>
           <th class="col7" scope="col">Download</th>
           <th class="col7" scope="col">Delete</th>
+          <th class="col7" scope="col">ผู้อัพโหลด</th>
         </tr>
         <? $sql = mysql_query ("select * from doc_file f , admin a where f.a_id = a.a_id order by f.doc_id desc") or die (mysql_error());
   $i = 1;
@@ -103,13 +103,13 @@ if($_REQUEST['doc']=='del'){
   ?>
         <tr>
           <th class="style3" scope="col"><? echo $i++;?></th>
-          <th class="style3" scope="col" align="left"><? echo $show[doc_name];?></th>
-          <th class="style3" scope="col"><? echo $show[a_name];?></th>
+          <th class="style3" scope="col" align="left"><? echo $show[doc_name];?></th> 
           <th class="style3" scope="col"><? echo $show[doc_date];?></th>
           <th align="center" class="style3" scope="col"><a href="?doc=show&id=<? echo $show[doc_id];?>"><img src="images/icon/4.jpg" width="25" height="23" /></a></th>
           <th align="center" class="style3" scope="col"><a href="?doc=edit&id=<? echo $show[doc_id];?>"><img src="images/icon/Text-Edit-icon.png" width="25" height="23" /></a></th>
           <th class="style3" scope="col"><div align="center"><a href="docs/<? echo $show[doc_file];?>"><img src="images/icon/Download-icon.png" width="25" height="23" /></a></div></th>
           <th class="style3" scope="col" align="center"><a href="?doc=del&id=<? echo $show[doc_id];?>" onclick="return confirm ('ยืนยันการลบ');"><img src="images/icon/imagess.jpg" width="25" height="23" /></a></th>
+          <th class="style3" scope="col">ผู้ดูแลระบบ : <? echo $show[a_name];?></th>
         </tr>
         <? }?>
         <tr>
@@ -243,6 +243,7 @@ if($_REQUEST['doc']=='del'){
             <th scope="col" style="padding:5px 1px;"><div align="right">
               <label>
               <input type="submit" name="Submit" value="Edit" />
+               <input type="hidden" name="doc_id" value="<?php echo $_REQUEST[id];?>" />
               </label>
             </div></th>
             <th scope="col" style="padding:5px 3px;"><div align="left">

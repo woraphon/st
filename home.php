@@ -43,11 +43,11 @@ chk_login ();
 	  <table width="100%" border="0">
         <tr>
           <th class="col7" scope="col">ลำดับ</th>
-          <th class="col7" scope="col">ชื่อเอกสาร</th>
-          <th class="col7" scope="col">ผู้สร้าง</th>
-          <th class="col7" scope="col">วันที่สร้าง</th>
+          <th class="col7" scope="col">ชื่อเอกสาร</th>        
+          <th class="col7" scope="col">วันที่อัพโหลด</th>
           <th class="col7" scope="col">View</th>
           <th class="col7" scope="col">ดาวน์โหลด</th>
+          <th class="col7" scope="col">ผู้อัพโหลด</th>
         </tr>
         <? 
 		//แสดงข้อมูลปกติ
@@ -91,11 +91,11 @@ $total = mysql_num_rows($Qtotal); // หาจำนวน record
   ?>
         <tr>
           <th class="style1" scope="col"><span class="style3"><? echo $i++;?></span></th>
-          <th class="style1" scope="col" align="left"><span class="style3"><? echo $show[doc_name];?></span></th>
-          <th class="style1" scope="col"><span class="style3"><? echo $show[a_name];?></span></th>
+          <th class="style1" scope="col" align="left"><span class="style3"><? echo $show[doc_name];?></span></th> 
           <th class="style1" scope="col"><span class="style3"><? echo $show[doc_date];?></span></th>
           <th scope="col"><div align="center" class="style3"><a href="view_docs.php?id=<? echo $show[doc_id];?>" target="_blank"><img src="images/icon/4.jpg" width="25" height="23" /></a></div></th>
           <th scope="col" align="center"><a href="docs/<? echo $show[doc_file];?>" class="style3"><img src="images/icon/Download-icon.png" width="25" height="23" /></a></th>
+          <th class="style1" scope="col"><span class="style3">ผู้ดูแลระบบ : <? echo $show[a_name];?></span></th>
         </tr>
         <? }?>
         <tr>
